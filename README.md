@@ -7,10 +7,10 @@
 1. handle duplicate values
 2. handle missing values
 
-# Requirement:
+# Requirement
 no activity @log_train.csv in past 10 days --> may drop the course
 
-# Data to classifiers:
+# Data to classifiers
 date.csv
 - course id
 - to: 10 days after the date have no related records in log_train => this is a dropout
@@ -38,3 +38,8 @@ log_train.csv
 true_train.csv
 - enrollment id
 - ground truth
+
+# Classifiers
+- KNN
+- SVM
+- random forest
