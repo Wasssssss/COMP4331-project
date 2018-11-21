@@ -1,25 +1,25 @@
 # COMP4331-project
 
-# Load data
+## Load data
 pandas
 
-# Data pre-processing
+## Data pre-processing
 1. handle duplicate values
 2. handle missing values
 3. handle impossible data combinations
 4. handle noisy data (DBSCAN?)
 
-# Data pre-processing techniques
+## Data pre-processing techniques
 1. feature selection: selecting a subset of relevant features for use in model construction
 https://en.wikipedia.org/wiki/Feature_selection
 2. data cleaning (handle noisy data)
 3. data integration
 4. data reduction: remove unimportant arrtibutes (why drop them?)
 
-# Requirement
+## Requirement
 no activity @log_train.csv in past 10 days --> may drop the course
 
-# Data to classifiers
+## Data to classifiers
 date.csv
 - course id
 - to: 10 days after the date have no related records in log_train => this is a dropout
@@ -48,7 +48,7 @@ true_train.csv
 - enrollment id
 - ground truth
 
-# Classifiers
+## Classifiers
 - KNN
 - SVM
 - random forest
