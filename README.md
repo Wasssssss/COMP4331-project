@@ -1,11 +1,17 @@
 # COMP4331-project
 
 # Load data
-...
+pandas
 
-# Data pre-processing:
+# Data pre-processing
 1. handle duplicate values
 2. handle missing values
+3. handle impossible data combinations
+
+# Data pre-processing techniques
+1. feature selection: selecting a subset of relevant features for use in model construction
+https://en.wikipedia.org/wiki/Feature_selection
+2. 
 
 # Requirement
 no activity @log_train.csv in past 10 days --> may drop the course
@@ -20,7 +26,7 @@ object.csv
 - course id
 - module id <--> log_train: object
 - category <--> log_train: event
-- children
+- children (separate from one record [pre-processing])
 
 enrollment_train.csv
 - enrollment id
