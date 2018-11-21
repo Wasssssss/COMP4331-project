@@ -19,8 +19,8 @@ date.csv
 object.csv
 - course id
 - module id <--> log_train: object
-(- category <--> log_train: event)
-(- children)
+- category <--> log_train: event
+- children
 
 enrollment_train.csv
 - enrollment id
