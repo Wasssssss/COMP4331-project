@@ -49,6 +49,10 @@ true_train.csv
 - ground truth
 
 ### Classifiers
-- KNN
-- SVM
-- random forest
+- cross validation
+- boosting
+- report precision for both training & testing sets
+- ensemble method
+- KNN (Anson)
+- SVM (Gillian)
+- random forest (Heidi)
