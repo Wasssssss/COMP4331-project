@@ -7,11 +7,14 @@ pandas
 1. handle duplicate values
 2. handle missing values
 3. handle impossible data combinations
+4. handle noisy data (DBSCAN?)
 
 # Data pre-processing techniques
 1. feature selection: selecting a subset of relevant features for use in model construction
 https://en.wikipedia.org/wiki/Feature_selection
-2. 
+2. data cleaning (handle noisy data)
+3. data integration
+4. data reduction: remove unimportant arrtibutes (why drop them?)
 
 # Requirement
 no activity @log_train.csv in past 10 days --> may drop the course
