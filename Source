@@ -1,0 +1,98 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Mar 25 19:21:38 2018
+
+@author: user
+"""
+
+#Assignment2 Q2.2_kNN,SVM,Random Forest
+import time
+import numpy as np
+import scipy.io as sio
+import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+
+#import training and testing data from downloaded files
+def import_data():
+
+    train_images = sio.loadmat("train_images.mat")
+    train_images_data = train_images.get("train_images")
+
+    train_labels = sio.loadmat("train_labels.mat")
+    train_labels_data = train_labels.get("train_labels")[0]
+
+    test_images = sio.loadmat("test_images.mat")
+    test_images_data = test_images.get("test_images")
+
+    test_labels = sio.loadmat("test_labels.mat")
+    test_labels_data = test_labels.get("test_labels")[0]
+
+    return train_images_data , train_labels_data , test_images_data , test_labels_data
+
+#different funcitons for different settings of decision tree
+#at the same time for counting the training time
+def KNN(train_X, train_y, k):
+    start = time.time()
+
+    clf = KNeighborsClassifier(n_neighbors = k)
+    clf.fit(train_X, train_y)
+    
+    print "The training time of kNN classifier: ", time.time() - start , " seconds."
+    return clf
+
+def SVM(train_X, train_y):
+    start = time.time()
+    
+    clf = SVC(kernel = 'linear')
+    clf.fit(train_X, train_y)
+    
+    print "The training time of SVM classifier: ", time.time() - start , " seconds."
+    return clf
+
+def RF(train_X, train_y):
+    start = time.time()
+    
+    clf = RandomForestClassifier(max_depth = 5, random_state = 0)
+    clf.fit(train_X, train_y)
+    
+    print "The training time of RF classifier: ", time.time() - start , " seconds."
+    return clf
+
+if __name__ == "__main__":
+
+    #setting data needed and class labels used for evaluation
+    train_images , train_labels , test_images , test_labels = import_data()
+    labels = ["class 0","class 1","class 2","class 3","class 4","class 5","class 6","class 7","class 8","class 9",]
+
+    #calling different function above to give a prediction of the testing data
+    # and give the evaluation metrics
+#================================================#
+    knn = KNN(train_images, train_labels, k = 10)
+    start = time.time()
+    knn_pred = knn.predict(test_images)
+    print "The prediction time of kNN classifier: ", time.time() - start , " seconds."
+
+    print(classification_report(test_labels, knn_pred, target_names=labels))
+    print "The accuracy of this classifier: " , accuracy_score(test_labels, knn_pred)
+
+#===============================================#
+    rf = RF(train_images, train_labels)
+    start = time.time()
+    rf_pred = rf.predict(test_images)
+    print "The prediction time of RF classifier: ", time.time() - start , " seconds."
+
+    print(classification_report(test_labels, rf_pred, target_names=labels))
+    print "The accuracy of this classifier: " , accuracy_score(test_labels, rf_pred)
+
+#================================================#
+    svm = SVM(train_images, train_labels)
+    start = time.time()
+    svm_pred = svm.predict(test_images)
+    print "The prediction time of SVM classifier: ", time.time() - start , " seconds."
+
+    print(classification_report(test_labels, svm_pred, target_names=labels))
+    print "The accuracy of this classifier: " , accuracy_score(test_labels, svm_pred)
