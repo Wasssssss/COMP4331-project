@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import csv
 
 def get_time_dict():
     rng = pd.date_range('2013-10-27', '2014-08-01')
@@ -48,3 +49,22 @@ class Enrollment():
 time_dict = get_time_dict()
 enrollment = Enrollment('data/train/enrollment_train.csv')
 
+class Truth():          
+    def _init_(self, filename):
+        with open(filename, 'r') as fin:
+            reader = csv.reader(fin)
+            self.truth_ids= []
+            self.truth_info = {} 
+            
+            for line in reader:
+                self.truth_ids.append(line[0])
+                self.truth_info[line[0]] = [line[0],line[1]]
+
+if __name__ == '__main__':
+    time_dict = get_time_dict()
+    enrollment = Enrollment('train/enrollment_train.csv')
+    truth = Truth('train/truth_train.csv')
+    print(enrollment.enrollment_info.get("1")) #get the particular item from the class
+    print(truth.truth_info.get("5")) #get the particular item from the class
+    
+    
