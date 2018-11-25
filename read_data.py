@@ -61,31 +61,33 @@ class Truth():
                 self.truth_ids.append(line[0])
                 self.truth_info[line[0]] = [line[0],line[1]]
                 
-class Log():          
+class Log():
     def __init__(self, filename):
-        with open(filename, 'r') as fin:
-            reader = csv.reader(fin)
-            self.log_ids = []
-            self.studLog = {}
-            self.each_log_info = {}
-            self.log_info = {}
- 
-            
-            for line in reader:
-                if line[0] == 'enrollment_id':        # ignore the first row             
-                    continue
-                                 
-                if line[0] not in self.log_ids:
-                    self.studLog = {}
-                    self.log_info[line[0]] = [line[0], line[1], line[2], line[3],line[4]]
-                else:
-#                    self.each_log_info = [line[0], line[1], line[2], line[3],line[4]]
-#                    Dict.update(self.each_log_info)
-                    self.each_log_info = {line[0], line[1], line[2], line[3],line[4]}
-                    self.studLog.appends(self.each_log_info)
-                    self.log_info[line[0]] = self.studLog
+        fin = open(filename)
+        #fin.next()
 
-                self.log_ids.append(line[0])
+        self.enrollment_ids = []
+        self.enrollment_info = {}
+        self.dates = {}
+        self.events = {}
+        #self.source = {}
+        #self.objects = {}
+
+        for line in fin:
+            enrollment_id, time, source, event, objects = line.strip().split(',')
+            if enrollment_id == 'enrollment_id':        # ignore the first row
+                continue
+            self.enrollment_ids.append(enrollment_id)
+            
+            if enrollment_id not in self.enrollment_info:
+                self.enrollment_info[enrollment_id] = [time, source, event, objects]
+                self.dates[enrollment_id] = [time[:10]]
+                self.events[enrollment_id] = [event]
+            else:
+                self.enrollment_info[enrollment_id].append([time, source, event, objects])
+                if time[:10] not in self.dates[enrollment_id]:
+                    self.dates[enrollment_id].append(time[:10])
+                self.events[enrollment_id].append(event)
 
 class Date():
     def __init__(self, filename):
@@ -118,30 +120,6 @@ class Object():
                     self.object_info[i] = [line[0], line[1], line[2],line[3], line[4]]
                     i = i + 1
 
-
-class Log():
-    def __init__(self, filename):
-        fin = open(filename)
-        #fin.next()
-
-        self.enrollment_ids = []
-        self.enrollment_info = {}
-        #self.time = {}
-        #self.source = {}
-        #self.event = {}
-        #self.objects = {}
-
-        for line in fin:
-            enrollment_id, time, source, event, objects = line.strip().split(',')
-            if enrollment_id == 'enrollment_id':        # ignore the first row
-                continue
-            self.enrollment_ids.append(enrollment_id)
-            
-            if enrollment_id not in self.enrollment_info:
-                self.enrollment_info[enrollment_id] = [time, source, event, objects]
-            else:
-                self.enrollment_info[enrollment_id].append([time, source, event, objects])
-
                 
 if __name__ == '__main__':
     time_dict = get_time_dict()
@@ -152,8 +130,8 @@ if __name__ == '__main__':
     log = Log('data/train/log_train.csv')
 
 
-    print(enrollment.enrollment_info.get("4")) #get the particular item from the class
-    print(truth.truth_info.get("5")) #get the particular item from the class
+    # print(enrollment.enrollment_info.get("4")) #get the particular item from the class
+    # print(truth.truth_info.get("5")) #get the particular item from the class
     
     #handling/testing print of "Date('data/date.csv')"
     #print a tuple when the get content of column[0] = "bWdj2GDclj5ofokWjzoa5jAwMkxCykd6"
@@ -169,4 +147,5 @@ if __name__ == '__main__':
 
     # print(log.enrollment_info.get("4"))
     
-#    print(truth.log_info.get("1")) #get the particular item from the class
+    # print(log.dates.get("1")) #get the particular item from the class
+    # print(log.events.get("1")) #get the particular item from the class
