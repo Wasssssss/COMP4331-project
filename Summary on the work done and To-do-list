@@ -1,0 +1,42 @@
+To be continue on 26/11/2018
+
+what are done:
+1) read_data.py: all are fine and not need to change
+2) preprocess.py: join "Date_To"(from date.csv) with the object file(from object.csv)
+like this (preview):
+
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+(['SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw', 'mq2oOcVUhjfPK82lDdiNy312JszVFIOm', 'html', '', 'null'], '27/6/2014')
+
+
+
+
+what need to be done:
+1) preprocessing.py:
+
+- aim to include all these attributes in a big table: 
+
+  Enrollment_id(enrollment), Username(enrollment), Course_id(enrollment), 
+  Module_id(object), catagory(object), Children(object), Course_date_To(date), Access_time(log)
+
+- now need to: 
+
+(a) join: Enrollment_id(enrollment), Username(enrollment), Course_id(enrollment), Access_time(log) to be previous table
+(b) combine the count number to the table 
+
+  
+
+
