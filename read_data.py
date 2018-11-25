@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import csv
 
+
 def get_time_dict():
     rng = pd.date_range('2013-10-27', '2014-08-01')
     print('number of dates:', len(rng))
@@ -29,6 +30,7 @@ class Enrollment():
                 continue
             self.enrollment_ids.append(enrollment_id)
             self.enrollment_info[enrollment_id] = [username, course_id]
+            
 
             if username not in self.user_info:
                 self.user_info[username] = [course_id]
@@ -41,11 +43,11 @@ class Enrollment():
                 self.course_info[course_id] = [username]
             else:
                 self.course_info[course_id].append(username)
-        print("load enrollment info over!")
-        print("number of courses:", len(self.course_info))
-        print("number of enrollments:", len(self.enrollment_info))
-        print("information of enrollment_id=1:", self.enrollment_info.get("1"))
-
+#        print("load enrollment info over!")
+#        
+#        print("number of courses:", len(self.course_info))
+#        print("number of enrollments:", len(self.enrollment_info))
+#        print("information of enrollment_id=4:", self.enrollment_info.get("4"))
 
 
 class Truth():          
@@ -59,10 +61,93 @@ class Truth():
                 self.truth_ids.append(line[0])
                 self.truth_info[line[0]] = [line[0],line[1]]
                 
+class Log():          
+    def __init__(self, filename):
+        with open(filename, 'r') as fin:
+            reader = csv.reader(fin)
+            self.log_ids = []
+            self.studLog = {}
+            self.each_log_info = {}
+            self.log_info = {}
+ 
+            
+            for line in reader:
+                if line[0] == 'enrollment_id':        # ignore the first row             
+                    continue
+                                 
+                if line[0] not in self.log_ids:
+                    self.studLog = {}
+                    self.log_info[line[0]] = [line[0], line[1], line[2], line[3],line[4]]
+                else:
+#                    self.each_log_info = [line[0], line[1], line[2], line[3],line[4]]
+#                    Dict.update(self.each_log_info)
+                    self.each_log_info = {line[0], line[1], line[2], line[3],line[4]}
+                    self.studLog.appends(self.each_log_info)
+                    self.log_info[line[0]] = self.studLog
 
+                self.log_ids.append(line[0])
+
+class Date():
+    def __init__(self, filename):
+        with open(filename, 'r') as fin:
+            reader = csv.reader(fin)
+            self.course_ids = []
+            self.course_info = {}
+            i = 0
+
+                        
+            for line in reader:
+                if line[0] == 'course_id':        # ignore the first row             
+                    continue
+                if line[0] != "":     
+                    self.course_info[i] = [line[0], line[1], line[2]]
+                    i = i + 1
+
+class Object():
+    def __init__(self, filename):
+        with open(filename, 'r') as fin:
+            reader = csv.reader(fin)  
+            self.module_ids = []
+            self.object_info = {}
+            i = 0
+            
+            for line in reader:
+                if line[0] == 'course_id':        # ignore the first row             
+                    continue
+                if line[0] != "":
+                    self.object_info[i] = [line[0], line[1], line[2],line[3], line[4]]
+                    i = i + 1
+                
 if __name__ == '__main__':
     time_dict = get_time_dict()
     enrollment = Enrollment('data/train/enrollment_train.csv')
     truth = Truth('data/train/truth_train.csv')
-    print(enrollment.enrollment_info.get("1")) #get the particular item from the class
+    date = Date('data/date.csv')
+    objects = Object('data/object.csv')
+#    log = Log('data/train/log_train.csv')
+
+
+    print(enrollment.enrollment_info.get("4")) #get the particular item from the class
     print(truth.truth_info.get("5")) #get the particular item from the class
+    
+    #handling/testing print of "Date('data/date.csv')"
+    #print a tuple when the get content of column[0] = "bWdj2GDclj5ofokWjzoa5jAwMkxCykd6"
+    for i in date.course_info:
+        if date.course_info.get(i)[0] == "bWdj2GDclj5ofokWjzoa5jAwMkxCykd6":
+            print(date.course_info.get(i))
+    
+    #handling/testing print of "Object('data/object.csv')"
+    #print all the tuples when the get content of column[0] = "SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw"     
+    for i in objects.object_info:
+        if (objects.object_info.get(i)[0] == "SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw"):
+            print(objects.object_info.get(i))
+            
+       
+            
+            
+        
+
+#    print(truth.log_info.get("1")) #get the particular item from the class
+    
+
+    
