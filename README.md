@@ -8,6 +8,7 @@ pandas
 2. handle missing values
 3. handle impossible data combinations
 4. handle noisy data (DBSCAN?)
+5. feature processing (e.g. calculate number of dates)
 
 ### Data pre-processing techniques
 1. feature selection: selecting a subset of relevant features for use in model construction
