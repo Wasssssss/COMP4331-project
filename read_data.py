@@ -80,11 +80,13 @@ class Log():
             self.enrollment_ids.append(enrollment_id)
             
             if enrollment_id not in self.enrollment_info:
-                self.enrollment_info[enrollment_id] = [time, source, event, objects]
+                # self.enrollment_info[enrollment_id] = [time, source, event, objects]
+                self.enrollment_info[enrollment_id] = [enrollment_id] # print(log.enrollment_info.get("4")[0]) --> enrollment id
+                self.enrollment_info[enrollment_id].append([enrollment_id, time, source, event, objects]) # print(log.enrollment_info.get("4")[1]) --> ['4', 2014-06-15T01:44:10', 'server', 'navigate', 'Oj6eQgzrdqBMlaCtaq1IkY6zruSrb71b']
                 self.dates[enrollment_id] = [time[:10]]
                 self.events[enrollment_id] = [event]
             else:
-                self.enrollment_info[enrollment_id].append([time, source, event, objects])
+                self.enrollment_info[enrollment_id].append([enrollment_id, time, source, event, objects])
                 if time[:10] not in self.dates[enrollment_id]:
                     self.dates[enrollment_id].append(time[:10])
                 self.events[enrollment_id].append(event)
@@ -144,8 +146,21 @@ if __name__ == '__main__':
     # for i in objects.object_info:
         # if (objects.object_info.get(i)[0] == "SpATywNh6bZuzm8s1ceuBUnMUAeoAHHw"):
             # print(objects.object_info.get(i))
+    
+#    print(log.enrollment_info.get("4"))
 
-    # print(log.enrollment_info.get("4"))
+#    print(log.enrollment_info.get("4")[0])
+#    print("/n")
+#    print(log.enrollment_info.get("4")[1])
+#    print("/n")
+#    print(log.enrollment_info.get("4")[2])
+#    print("/n")
+#    print(log.enrollment_info.get("4")[3])
+#    print("/n")
+#    print(log.enrollment_info.get("4")[4][0])
+#    print("/n")
+#    print(log.enrollment_info.get("4")[5])
+#    print("/n")
     
     # print(log.dates.get("1")) #get the particular item from the class
     # print(log.events.get("1")) #get the particular item from the class
