@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
     # count no. of different events by each user
     events = {}
-    for key in log.enrollment_ids: # Log_Data.events.keys():
+    for key in enrollment.enrollment_ids: # Log_Data.events.keys():
         countproblem = 0
         countvideo = 0 
         countaccess = 0
@@ -93,20 +93,27 @@ if __name__ == '__main__':
                 countpage_close += 1
             else:
                 print("Error")
-        events[key]= {countproblem, countvideo, countaccess, countwiki, countdiscussion, countnavigate, countpage_close}
-    print(events)
+        if key not in events:
+            events[key] = [countproblem]
+        events[key].append(countvideo)
+        events[key].append(countaccess)
+        events[key].append(countwiki)
+        events[key].append(countdiscussion)
+        events[key].append(countnavigate)
+        events[key].append(countpage_close)            
+    #print(events)
 
     # count no. of access per day by each user
     period = {}
-    for key in log.enrollment_ids:
+    for key in enrollment.enrollment_ids:
         period[key] =len(log.dates.get(key))
-    print(period)
+    #print(period)
 
     # find the latest access by each user
     latest_access = {}
-    for key in log.enrollment_ids:
+    for key in enrollment.enrollment_ids:
         latest_access[key] = max(log.dates.get(key))
-    print(latest_access)
+    #print(latest_access)
 
 # ------------- www ------------- #
 # >>> a = np.array([[1, 2], [3, 4]])
@@ -114,3 +121,10 @@ if __name__ == '__main__':
 # >>> np.concatenate((a, b), axis=0)
 
 # arr = np.array([])
+
+# Gather all info tgt#
+    features = []
+    for EnrollID in enrollment.enrollment_ids:
+        #features: Enrollment ID, UserID, CourseID, # of problem, # of video, # of access, # of wiki, # of discussion, # of navigate, # of page_close, # of dates enrolled to this course, # latest_access
+        featuresarr = np.array([EnrollID, enrollment.enrollment_info[EnrollID][0], enrollment.enrollment_info[EnrollID][1], *events[EnrollID], period[EnrollID], latest_access[EnrollID]],dtype=object)
+        features.append(featuresarr)
