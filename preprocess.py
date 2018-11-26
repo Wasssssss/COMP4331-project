@@ -1,16 +1,23 @@
 import pandas as pd
 import numpy as np
 import csv
-from read_data import get_time_dict,Enrollment, Truth, Date, Object, Log
+from read_data import Enrollment, Truth, Date, Object, Log
 
 
-if __name__ == '__main__':
-    time_dict = get_time_dict()
-    enrollment = Enrollment('data/train/enrollment_train.csv')
-    truth = Truth('data/train/truth_train.csv')
-    date = Date('data/date.csv')
-    objects = Object('data/object.csv')
-    log = Log('data/train/log_train.csv')
+def main(is_train):
+    #time_dict = get_time_dict()
+    if is_train:
+        enrollment = Enrollment('data/train/enrollment_train.csv')
+        truth = Truth('data/train/truth_train.csv')
+        date = Date('data/date.csv')
+        objects = Object('data/object.csv')
+        log = Log('data/train/log_train.csv')
+    else:
+        enrollment = Enrollment('data/test/enrollment_test.csv')
+        truth = Truth('data/test/truth_test.csv')
+        date = Date('data/date.csv')
+        objects = Object('data/object.csv')
+        log = Log('data/test/log_test.csv')
 
 #    
 #    # enrollment_ids_list
@@ -46,22 +53,22 @@ if __name__ == '__main__':
 
 #<-------these are ok ------>
 #    append course_date_To and objects
-    i = 0
-    j = 0
-    k = 0
-    for i in date.course_info:
-        for j in objects.object_info: 
+#    i = 0
+#    j = 0
+#    k = 0
+#    for i in date.course_info:
+#        for j in objects.object_info: 
 #            for k in enrollment.enrollment_info:
-            if date.course_info.get(i)[0] == objects.object_info.get(j)[0]:          
+#            if date.course_info.get(i)[0] == objects.object_info.get(j)[0]:          
 #                    if enrollment.enrollment_info(k)[2] == objects.object_info.get(j)[0]:
-                print(objects.object_info.get(i),date.course_info.get(i)[2])
+#                print(objects.object_info.get(i),date.course_info.get(i)[2])
 
     # for k in log.enrollment_ids:
         # print(k)
         # print(log.enrollment_info.get(k)[1])
 
-    print(log.enrollment_info.get("4")[0]) # 4
-    print(log.enrollment_info.get("4")[1][1][:10]) # 2014-06-15
+ #   print(log.enrollment_info.get("4")[0]) # 4
+ #   print(log.enrollment_info.get("4")[1][1][:10]) # 2014-06-15
 
 
 # ------------- meaningful data, grouped by each user ------------- #
@@ -124,7 +131,11 @@ if __name__ == '__main__':
 
 # Gather all info tgt#
     features = []
+    labels = []
     for EnrollID in enrollment.enrollment_ids:
         #features: Enrollment ID, UserID, CourseID, # of problem, # of video, # of access, # of wiki, # of discussion, # of navigate, # of page_close, # of dates enrolled to this course, # latest_access
-        featuresarr = np.array([EnrollID, enrollment.enrollment_info[EnrollID][0], enrollment.enrollment_info[EnrollID][1], *events[EnrollID], period[EnrollID], latest_access[EnrollID]],dtype=object)
+        featuresarr = np.array([*events[EnrollID], period[EnrollID]],dtype=object)
         features.append(featuresarr)
+    for EnrollID in enrollment.enrollment_ids:
+        labels.append(truth.truth_info[EnrollID][1])
+    return features, labels
