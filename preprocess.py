@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
 
 
-#<-------this are ok ------>
+#<-------these are ok ------>
 #    append course_date_To and objects
     i = 0
     j = 0
