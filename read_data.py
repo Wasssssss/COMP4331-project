@@ -66,19 +66,15 @@ class Log():
         fin = open(filename)
         #fin.next()
 
-        self.enrollment_ids = []
         self.enrollment_info = {}
         self.dates = {}
         self.events = {}
-        #self.source = {}
-        #self.objects = {}
 
         for line in fin:
             enrollment_id, time, source, event, objects = line.strip().split(',')
             if enrollment_id == 'enrollment_id':        # ignore the first row
                 continue
-            self.enrollment_ids.append(enrollment_id)
-            
+                        
             if enrollment_id not in self.enrollment_info:
                 # self.enrollment_info[enrollment_id] = [time, source, event, objects]
                 self.enrollment_info[enrollment_id] = [enrollment_id] # print(log.enrollment_info.get("4")[0]) --> enrollment id
@@ -123,13 +119,13 @@ class Object():
                     i = i + 1
 
                 
-if __name__ == '__main__':
-    time_dict = get_time_dict()
-    enrollment = Enrollment('data/train/enrollment_train.csv')
-    truth = Truth('data/train/truth_train.csv')
-    date = Date('data/date.csv')
-    objects = Object('data/object.csv')
-    log = Log('data/train/log_train.csv')
+##if __name__ == '__main__':
+ #   time_dict = get_time_dict()
+ #   enrollment = Enrollment('data/train/enrollment_train.csv')
+ #   truth = Truth('data/train/truth_train.csv')
+ #   date = Date('data/date.csv')
+ #   objects = Object('data/object.csv')
+ #   log = Log('data/train/log_train.csv')
 
 
     # print(enrollment.enrollment_info.get("4")) #get the particular item from the class
