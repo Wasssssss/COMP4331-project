@@ -133,7 +133,7 @@ def main(is_train):
     features = []
     labels = []
     for EnrollID in enrollment.enrollment_ids:
-        #features: Enrollment ID, UserID, CourseID, # of problem, # of video, # of access, # of wiki, # of discussion, # of navigate, # of page_close, # of dates enrolled to this course, # latest_access
+        #features: # of problem, # of video, # of access, # of wiki, # of discussion, # of navigate, # of page_close, # of dates enrolled to this course
         featuresarr = np.array([*events[EnrollID], period[EnrollID]],dtype=object)
         features.append(featuresarr)
     for EnrollID in enrollment.enrollment_ids:
